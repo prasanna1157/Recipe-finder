@@ -29,7 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/java/recipefinder/recipefinder/controller/UserController.java
 /src/main/resources/application.properties
 /mvnw.cmd
 /.mvn/wrapper/maven-wrapper.properties
