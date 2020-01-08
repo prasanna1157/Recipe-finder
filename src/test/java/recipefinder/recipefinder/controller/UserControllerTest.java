@@ -27,9 +27,9 @@ class UserControllerTest {
         //When
         String actual = userController.foo();
 
-        //Then
         String expected = "User created successfully!";
 
+        //Then
         assertThat(actual).isEqualTo(expected);
     }
 
