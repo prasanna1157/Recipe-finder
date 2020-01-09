@@ -12,7 +12,7 @@ import recipefinder.recipefinder.service.UserService;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+class UserController {
 
     @Autowired
     private UserService userService;
