@@ -2,15 +2,21 @@ package recipefinder.recipefinder.model;
 
 public class User {
 
+    private int id;
     private String name;
     private int age;
     private String location;
 
     private UserCredentials userCredentials;
 
+    public User() { this.userCredentials = new UserCredentials("dummy", "dummy"); }
     public User(UserCredentials userCredentials) {
         this.userCredentials = userCredentials;
     }
+
+    public int getId() {  return id;  }
+
+    public void setId(int id) {  this.id = id;  }
 
     public String getName() {
         return name;
