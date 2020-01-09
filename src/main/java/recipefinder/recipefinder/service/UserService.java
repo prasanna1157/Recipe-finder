@@ -2,27 +2,29 @@ package recipefinder.recipefinder.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import recipefinder.recipefinder.exception.DuplicateUserException;
+import recipefinder.recipefinder.exception.UserNotFoundException;
 import recipefinder.recipefinder.model.User;
 import recipefinder.recipefinder.repository.UserRepository;
 
 @Service
 public class UserService {
+
+    UserService() {
+    }
+
     @Autowired
     private UserRepository userRepository;
 
-    public User getUserFromId(Integer id) throws Exception {
-        return userRepository.getUserFromId(id);
+    public User getUser(String username) throws UserNotFoundException {
+        return userRepository.getUser(username);
     }
 
-    public void addUser(User user) throws Exception {
+    public void addUser(User user) throws DuplicateUserException {
         userRepository.addUser(user);
     }
 
-    public void deleteUser(Integer id) throws Exception {
-        userRepository.deleteUser(id);
-    }
-
-    public void updateUser(Integer id, User user) throws Exception {
-        userRepository.updateUser(id, user);
+    public void removeUser(String username) throws UserNotFoundException {
+        userRepository.removeUser(username);
     }
 }
