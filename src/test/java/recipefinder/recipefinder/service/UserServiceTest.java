@@ -44,6 +44,12 @@ class UserServiceTest {
     }
 
     @Test
+    void shouldUpdateUser() {
+        userService.updateUser(testUser);
+        verify(userRepository).updateUser(testUser);
+    }
+
+    @Test
     void shouldRemoveUser() {
         String username = testUser.getUserCredentials().getUsername();
         userService.removeUser(username);

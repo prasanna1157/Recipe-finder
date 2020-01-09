@@ -44,6 +44,13 @@ public class UserRepository {
             throw new DuplicateUserException("User already exists");
     }
 
+    public void updateUser(User user) throws UserNotFoundException {
+        if(userMap.containsKey(user.getUserCredentials().getUsername()))
+            userMap.replace(user.getUserCredentials().getUsername(), user);
+        else
+            throw new UserNotFoundException("User with given id does not exist");
+    }
+
     public void removeUser(String username) throws UserNotFoundException {
 
         if (userMap.containsKey(username)) {
@@ -53,4 +60,4 @@ public class UserRepository {
             throw new UserNotFoundException("User with given id does not exist");
         }
     }
- }
+}

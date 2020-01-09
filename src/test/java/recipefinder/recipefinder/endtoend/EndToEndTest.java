@@ -35,6 +35,17 @@ class EndToEndTest {
     }
 
     @Test
+    void shouldUpdateUserSuccessfully() throws Exception {
+        User user = new User(new UserCredentials("kevin", "jero.jero"));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .put("/users/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void shouldDeleteUserSucessfully() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/users/{username}", "kevin"))

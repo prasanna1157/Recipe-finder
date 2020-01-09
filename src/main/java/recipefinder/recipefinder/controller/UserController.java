@@ -34,6 +34,12 @@ class UserController {
         userService.addUser(user);
     }
 
+    @PutMapping("/")
+    void updateUser(@RequestBody User user) throws UserNotFoundException {
+        Preconditions.checkNotNull(user);
+        userService.updateUser(user);
+    }
+
     @DeleteMapping("/{username}")
     void removeUser(@PathVariable("username") String username) {
         try {

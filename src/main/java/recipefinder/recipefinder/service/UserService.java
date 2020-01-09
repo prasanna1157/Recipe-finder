@@ -24,6 +24,10 @@ public class UserService {
         userRepository.addUser(user);
     }
 
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
+    }
+
     public void removeUser(String username) throws UserNotFoundException {
         userRepository.removeUser(username);
     }

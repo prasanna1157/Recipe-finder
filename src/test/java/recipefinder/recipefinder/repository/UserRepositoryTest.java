@@ -68,6 +68,25 @@ class UserRepositoryTest {
     }
 
     @Test
+    void shouldUpdateUser() {
+        User user = new User(new UserCredentials("kevin", "jero.jero"));
+        userRepository.updateUser(user);
+        assertThat(testUsersMap.get(user.getUserCredentials().getUsername())).isEqualTo(user);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenUpdateUserIsCalledWithUserThatDoesNotExist() {
+        User user = new User(new UserCredentials("ricky", "jero.jero"));
+
+        UserNotFoundException exception =
+                assertThrows(UserNotFoundException.class,
+                        () -> userRepository.updateUser(user),
+                        "Expected UserNotFoundException() to be thrown, but it didn't");
+
+        assertTrue(exception.getMessage().contains("User with given id does not exist"));
+    }
+
+    @Test
     void shouldRemoveUser() {
         userRepository.removeUser(user2.getUserCredentials().getUsername());
         assertThat(testUsersMap.containsKey(user2.getUserCredentials().getUsername())).isEqualTo(false);
