@@ -29,18 +29,23 @@ class UserController {
     }
 
     @PostMapping("/")
-    void addUser(@RequestBody User user) throws DuplicateUserException {
+    @ResponseStatus(HttpStatus.CREATED)
+    User addUser(@RequestBody User user) throws DuplicateUserException {
         Preconditions.checkNotNull(user);
         userService.addUser(user);
+        return user;
     }
 
     @PutMapping("/")
-    void updateUser(@RequestBody User user) throws UserNotFoundException {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    User updateUser(@RequestBody User user) throws UserNotFoundException {
         Preconditions.checkNotNull(user);
         userService.updateUser(user);
+        return user;
     }
 
     @DeleteMapping("/{username}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     void removeUser(@PathVariable("username") String username) {
         try {
             userService.removeUser(username);
