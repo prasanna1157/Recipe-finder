@@ -1,4 +1,4 @@
-package recipefinder.recipefinder.controller;
+package recipefinder.recipefinder.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,19 +8,20 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import recipefinder.recipefinder.model.User;
 import recipefinder.recipefinder.model.UserCredentials;
-import recipefinder.recipefinder.service.UserService;
+import recipefinder.recipefinder.repository.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class UserControllerTest {
+class UserServiceTest {
+
     @Mock
-    UserService userService;
+    UserRepository userRepository;
 
     @InjectMocks
-    private UserController userController = new UserController();
+    private UserService userService = new UserService();
 
     private User testUser;
 
@@ -31,27 +32,27 @@ class UserControllerTest {
 
     @Test
     void shouldGetUser() {
-        when(userService.getUser("kevin")).thenReturn(testUser);
-        User actual = userController.getUser("kevin");
+        when(userRepository.getUser("kevin")).thenReturn(testUser);
+        User actual = userService.getUser("kevin");
         assertThat(actual).isEqualTo(testUser);
     }
 
     @Test
     void shouldAddUser() {
-        userController.addUser(testUser);
-        verify(userService).addUser(testUser);
+        userService.addUser(testUser);
+        verify(userRepository).addUser(testUser);
     }
 
     @Test
     void shouldUpdateUser() {
-        userController.updateUser(testUser);
-        verify(userService).updateUser(testUser);
+        userService.updateUser(testUser);
+        verify(userRepository).updateUser(testUser);
     }
 
     @Test
     void shouldRemoveUser() {
         String username = testUser.getUserCredentials().getUsername();
-        userController.removeUser(username);
-        verify(userService).removeUser(username);
+        userService.removeUser(username);
+        verify(userRepository).removeUser(username);
     }
 }

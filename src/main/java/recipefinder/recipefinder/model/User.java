@@ -8,6 +8,8 @@ public class User {
 
     private UserCredentials userCredentials;
 
+    public User() { }
+
     public User(UserCredentials userCredentials) {
         this.userCredentials = userCredentials;
     }

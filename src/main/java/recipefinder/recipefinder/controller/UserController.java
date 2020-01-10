@@ -1,14 +1,53 @@
 package recipefinder.recipefinder.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.assertj.core.util.Preconditions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import recipefinder.recipefinder.exception.DuplicateUserException;
+import recipefinder.recipefinder.exception.UserNotFoundException;
+import recipefinder.recipefinder.model.User;
+import recipefinder.recipefinder.service.UserService;
 
 @RestController
+@RequestMapping("/users")
 class UserController {
 
-    // TO-DO: Needs to change to POST and method contents added. Unit test needs to change accordingly.
-    @GetMapping("/user")
-    String foo() {
-        return "User created successfully!";
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/{username}")
+    User getUser(@PathVariable("username") String username) {
+        try {
+            return userService.getUser(username);
+        }
+        catch(UserNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User Not Found", e);
+        }
+    }
+
+    @PostMapping("/")
+    void addUser(@RequestBody User user) throws DuplicateUserException {
+        Preconditions.checkNotNull(user);
+        userService.addUser(user);
+    }
+
+    @PutMapping("/")
+    void updateUser(@RequestBody User user) throws UserNotFoundException {
+        Preconditions.checkNotNull(user);
+        userService.updateUser(user);
+    }
+
+    @DeleteMapping("/{username}")
+    void removeUser(@PathVariable("username") String username) {
+        try {
+            userService.removeUser(username);
+        }
+        catch (UserNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User Not Found", e);
+        }
     }
 }
