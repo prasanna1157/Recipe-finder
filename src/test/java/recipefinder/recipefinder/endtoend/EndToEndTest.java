@@ -31,7 +31,7 @@ class EndToEndTest {
                 .post("/users/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -42,14 +42,14 @@ class EndToEndTest {
                 .put("/users/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
 
     @Test
     void shouldDeleteUserSucessfully() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/users/{username}", "kevin"))
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
     }
 
     @Test
