@@ -25,6 +25,8 @@ public class UserRepository {
     private void createTestUsers() {
         userMap.put("kevin", new User(new UserCredentials("kevin", "jero")));
         userMap.put("dummy", new User(new UserCredentials("dummy", "jero")));
+        userMap.put("pipeline", new User(new UserCredentials("GetMaster", "GetProperMaster")));
+
     }
 
     public User getUser(String username) throws UserNotFoundException {

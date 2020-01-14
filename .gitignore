@@ -36,3 +36,7 @@ build/
 /.mvn/wrapper/MavenWrapperDownloader.java
 /mvnw
 /src/test/java/recipefinder/recipefinder/RecipeFinderApplicationTests.java
+
+###General Windows Extensions###
+.zip 
+/*.zip
