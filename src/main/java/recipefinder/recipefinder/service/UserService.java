@@ -10,11 +10,11 @@ import recipefinder.recipefinder.repository.UserRepository;
 @Service
 public class UserService {
 
-    UserService() {
-    }
-
     @Autowired
     private UserRepository userRepository;
+
+    UserService() {
+    }
 
     public User getUser(String username) throws UserNotFoundException {
         return userRepository.getUser(username);
